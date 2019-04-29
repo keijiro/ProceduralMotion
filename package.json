@@ -1,0 +1,13 @@
+{
+    "author": "Keijiro Takahashi",
+    "dependencies": { },
+    "description": "A script library for generating procedural motion.",
+    "displayName": "Procedural Motion Library",
+    "name": "jp.keijiro.klak.motion",
+    "unity": "2019.1",
+    "unityRelease": "0f2", 
+    "version": "1.0.0",
+    "dependencies": {
+        "com.unity.mathematics": "1.0.1"
+    }
+}

@@ -25,7 +25,7 @@ namespace Klak.Motion
 
         #endregion
 
-        #region Private Members
+        #region Private members
 
         static uint _sharedSeed = 1;
 

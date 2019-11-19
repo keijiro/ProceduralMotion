@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.unity.mathematics": "1.0.1",
     "com.unity.package-manager-ui": "2.1.2"
   }
 }

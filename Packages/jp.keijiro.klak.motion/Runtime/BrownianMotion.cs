@@ -19,8 +19,14 @@ namespace Klak.Motion
         public void Rehash()
         {
             var rand = new Random(_sharedSeed++);
+
+            // Abandon a few first numbers to warm up the PRNG.
+            rand.NextUInt(); rand.NextUInt();
+
             _positionOffset = rand.NextFloat3(-1e3f, 1e3f);
             _rotationOffset = rand.NextFloat3(-1e3f, 1e3f);
+
+            ApplyMotion();
         }
 
         #endregion
@@ -50,6 +56,29 @@ namespace Klak.Motion
             return f;
         }
 
+        void ApplyMotion()
+        {
+            var np = math.float3(
+                Fbm(_positionOffset.x, _time, octaves),
+                Fbm(_positionOffset.y, _time, octaves),
+                Fbm(_positionOffset.z, _time, octaves)
+            );
+
+            var nr = math.float3(
+                Fbm(_rotationOffset.x, _time, octaves),
+                Fbm(_rotationOffset.y, _time, octaves),
+                Fbm(_rotationOffset.z, _time, octaves)
+            );
+
+            np = np * positionAmount / 0.75f;
+            nr = nr * rotationAmount / 0.75f;
+
+            var nrq = quaternion.EulerZXY(math.radians(nr));
+
+            transform.localPosition = _initialPosition + np;
+            transform.localRotation = math.mul(nrq, _initialRotation);
+        }
+
         #endregion
 
         #region MonoBehaviour implementation
@@ -73,27 +102,8 @@ namespace Klak.Motion
 
         void Update()
         {
-            var np = math.float3(
-                Fbm(_positionOffset.x, _time, octaves),
-                Fbm(_positionOffset.y, _time, octaves),
-                Fbm(_positionOffset.z, _time, octaves)
-            );
-
-            var nr = math.float3(
-                Fbm(_rotationOffset.x, _time, octaves),
-                Fbm(_rotationOffset.y, _time, octaves),
-                Fbm(_rotationOffset.z, _time, octaves)
-            );
-
-            np = np * positionAmount / 0.75f;
-            nr = nr * rotationAmount / 0.75f;
-
-            var nrq = quaternion.EulerZXY(math.radians(nr));
-
-            transform.localPosition = _initialPosition + np;
-            transform.localRotation = math.mul(nrq, _initialRotation);
-
             _time += UnityEngine.Time.deltaTime * frequency;
+            ApplyMotion();
         }
 
         #endregion

@@ -1,6 +1,8 @@
 Procedural Motion
 =================
 
+![gif](https://i.imgur.com/PaSmih8.gif)
+
 The **Procedural Motion** package is a collection of small Unity scripts that
 are useful to create motion without pre-authored data.
 

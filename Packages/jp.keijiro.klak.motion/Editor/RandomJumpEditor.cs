@@ -11,6 +11,7 @@ namespace Klak.Motion
         SerializedProperty _maxDistance;
         SerializedProperty _minAngle;
         SerializedProperty _maxAngle;
+        SerializedProperty _seed;
 
         static class Styles
         {
@@ -24,6 +25,7 @@ namespace Klak.Motion
             _maxDistance = serializedObject.FindProperty("maxDistance");
             _minAngle = serializedObject.FindProperty("minAngle");
             _maxAngle = serializedObject.FindProperty("maxAngle");
+            _seed = serializedObject.FindProperty("seed");
         }
 
         public override void OnInspectorGUI()
@@ -70,6 +72,8 @@ namespace Klak.Motion
             }
 
             EditorGUILayout.EndHorizontal();
+
+            Utilities.ShowSeedField(_seed);
 
             if (EditorApplication.isPlaying && GUILayout.Button("Jump"))
                 foreach (RandomJump rj in targets) rj.Jump();

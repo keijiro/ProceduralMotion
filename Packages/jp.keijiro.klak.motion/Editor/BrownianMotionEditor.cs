@@ -11,6 +11,7 @@ namespace Klak.Motion
         SerializedProperty _rotationAmount;
         SerializedProperty _frequency;
         SerializedProperty _octaves;
+        SerializedProperty _seed;
 
         static class Styles
         {
@@ -24,6 +25,7 @@ namespace Klak.Motion
             _rotationAmount = serializedObject.FindProperty("rotationAmount");
             _frequency = serializedObject.FindProperty("frequency");
             _octaves = serializedObject.FindProperty("octaves");
+            _seed = serializedObject.FindProperty("seed");
         }
 
         public override void OnInspectorGUI()
@@ -38,6 +40,7 @@ namespace Klak.Motion
 
             EditorGUILayout.PropertyField(_frequency);
             EditorGUILayout.IntSlider(_octaves, 1, 9);
+            Utilities.ShowSeedField(_seed);
 
             serializedObject.ApplyModifiedProperties();
         }

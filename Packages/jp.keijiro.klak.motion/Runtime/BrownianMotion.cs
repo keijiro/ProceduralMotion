@@ -11,6 +11,7 @@ namespace Klak.Motion
         public float3 rotationAmount = 10;
         public float frequency = 1;
         public int octaves = 2;
+        public uint seed = 0;
 
         #endregion
 
@@ -18,10 +19,7 @@ namespace Klak.Motion
 
         public void Rehash()
         {
-            var rand = new Random(_sharedSeed++);
-
-            // Abandon a few first numbers to warm up the PRNG.
-            rand.NextUInt(); rand.NextUInt();
+            var rand = Utilities.Random(seed);
 
             _positionOffset = rand.NextFloat3(-1e3f, 1e3f);
             _rotationOffset = rand.NextFloat3(-1e3f, 1e3f);
@@ -32,8 +30,6 @@ namespace Klak.Motion
         #endregion
 
         #region Private members
-
-        static uint _sharedSeed = 1;
 
         float3 _positionOffset;
         float3 _rotationOffset;

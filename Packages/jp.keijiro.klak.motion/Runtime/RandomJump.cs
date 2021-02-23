@@ -13,22 +13,19 @@ namespace Klak.Motion
         public float minAngle = 0;
         public float maxAngle = 90;
 
+        public uint seed = 0;
+
         #endregion
 
         #region Public method
 
         public void Jump()
         {
-            var rand = new Random(_sharedSeed++);
+            var dp = _random.NextFloat3Direction();
+            dp *= _random.NextFloat(minDistance, maxDistance);
 
-            // Abandon a few first numbers to warm up the PRNG.
-            rand.NextUInt(); rand.NextUInt();
-
-            var dp = rand.NextFloat3Direction();
-            dp *= rand.NextFloat(minDistance, maxDistance);
-
-            var angle = math.radians(rand.NextFloat(minAngle, maxAngle));
-            var dr = quaternion.AxisAngle(rand.NextFloat3Direction(), angle);
+            var angle = math.radians(_random.NextFloat(minAngle, maxAngle));
+            var dr = quaternion.AxisAngle(_random.NextFloat3Direction(), angle);
 
             transform.localPosition = (float3)transform.localPosition + dp;
             transform.localRotation = math.mul(dr, transform.localRotation);
@@ -38,7 +35,13 @@ namespace Klak.Motion
 
         #region Private members
 
-        static uint _sharedSeed = 1;
+        Random _random;
+
+        #endregion
+
+        #region MonoBehaviour implementation
+
+        void Start() => _random = Utilities.Random(seed);
 
         #endregion
     }

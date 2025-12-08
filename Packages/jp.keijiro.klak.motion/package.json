@@ -1,13 +1,14 @@
 {
-    "author": "Keijiro Takahashi",
-    "dependencies": { "com.unity.mathematics": "1.2.1" },
-    "description": "A script library for generating procedural motion in Unity.",
-    "displayName": "Procedural Motion Library",
-    "keywords": [ "unity" ],
-    "license": "UNLICENSED",
-    "name": "jp.keijiro.klak.motion",
-    "repository": "github:keijiro/ProceduralMotion",
-    "unity": "2019.1",
-    "unityRelease": "0f2", 
-    "version": "1.1.0"
+  "name": "jp.keijiro.klak.motion",
+  "version": "1.1.0",
+  "displayName": "Procedural Motion Library",
+  "description": "A script library for generating procedural motion in Unity.",
+  "unity": "2022.3",
+  "author": "Keijiro Takahashi",
+  "dependencies": { "com.unity.mathematics": "1.2.1" },
+  "changelogUrl": "https://github.com/keijiro/ProceduralMotion/blob/master/CHANGELOG.md",
+  "documentationUrl": "https://github.com/keijiro/ProceduralMotion",
+  "licensesUrl": "https://github.com/keijiro/ProceduralMotion/blob/master/LICENSE",
+  "license": "Unlicense",
+  "_upm": { "changelog": "" }
 }
